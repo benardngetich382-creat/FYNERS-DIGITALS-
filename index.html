@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fymerstu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Login/Register Screen -->
+    <div id="auth-screen" class="auth-container">
+        <div class="auth-box">
+            <h1>Fymerstu</h1>
+            <div class="auth-tabs">
+                <button class="tab-btn active" id="login-tab">Login</button>
+                <button class="tab-btn" id="register-tab">Register</button>
+            </div>
+            
+            <div id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Enter username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-input">
+                        <input type="password" id="password" placeholder="Enter password">
+                        <span class="show-password" id="show-password"><i class="fas fa-eye"></i></span>
+                    </div>
+                </div>
+                <button id="login-btn" class="auth-btn">Login</button>
+            </div>
+            
+            <div id="register-form" class="auth-form" style="display: none;">
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" placeholder="Enter full name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label>Role (optional)</label>
+                    <div class="role-options">
+                        <label><input type="radio" name="role" value="student"> Student</label>
+                        <label><input type="radio" name="role" value="tutor"> Tutor</label>
+                        <label><input type="radio" name="role" value="other"> Other</label>
+                    </div>
+                </div>
+                <button id="register-btn" class="auth-btn">Register</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application (hidden until login) -->
+    <div id="app-container" style="display: none;">
+        <!-- Top Navigation Bar -->
+        <div class="top-nav" id="Tbo">
+            <div class="nav-left">
+                <span class="logo">Fymerstu</span>
+                <div class="nav-items">
+                    <button class="nav-btn"><i class="fas fa-user"></i> Profile</button>
+                    <button class="nav-btn"><i class="fas fa-users"></i> Colleague</button>
+                    <button class="nav-btn"><i class="fas fa-object-group"></i> Group</button>
+                    <button class="nav-btn"><i class="fas fa-database"></i> Datt</button>
+                    <button class="nav-btn"><i class="fas fa-envelope"></i> Maug</button>
+                </div>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Search...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+
+        <!-- Secondary Navigation Bar -->
+        <div class="secondary-nav" id="Tb1">
+            <button class="sec-nav-btn active" data-section="home"><i class="fas fa-home"></i> Home</button>
+            <button class="sec-nav-btn" data-section="library"><i class="fas fa-book"></i> Library</button>
+            <button class="sec-nav-btn" data-section="notes"><i class="fas fa-sticky-note"></i> Notes</button>
+            <button class="sec-nav-btn" data-section="revision"><i class="fas fa-redo"></i> Revision</button>
+            <button class="sec-nav-btn" data-section="exams"><i class="fas fa-file-alt"></i> Exams</button>
+            <button class="sec-nav-btn" data-section="videos"><i class="fas fa-video"></i> Videos</button>
+            <button class="sec-nav-btn" data-section="audios"><i class="fas fa-music"></i> Audios</button>
+            <button class="sec-nav-btn" data-section="slider"><i class="fas fa-sliders-h"></i> Slider</button>
+            <button class="sec-nav-btn" data-section="store"><i class="fas fa-store"></i> Store</button>
+            <button class="sec-nav-btn" data-section="other"><i class="fas fa-ellipsis-h"></i> Other</button>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <button class="sidebar-btn" id="sidebar-toggle"><i class="fas fa-bars"></i></button>
+            <div class="sidebar-menu" id="sidebar-menu">
+                <button class="menu-btn active" data-section="home"><i class="fas fa-home"></i> Home</button>
+                <button class="menu-btn" data-section="manage-myself"><i class="fas fa-user-cog"></i> Manage Myself</button>
+                <button class="menu-btn" data-section="manage-group"><i class="fas fa-users-cog"></i> Manage Group</button>
+                <button class="menu-btn" data-section="support"><i class="fas fa-question-circle"></i> Support</button>
+                <button class="menu-btn" data-section="contact"><i class="fas fa-envelope"></i> Contact Us</button>
+                <div class="menu-divider"></div>
+                <button class="menu-btn" data-section="profile-settings"><i class="fas fa-user-edit"></i> Profile Settings</button>
+                <button class="menu-btn" data-section="account"><i class="fas fa-cog"></i> My Account</button>
+                <button class="menu-btn" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Home Content (default) -->
+            <div id="home-content" class="content-section active">
+                <h2>Welcome to Fymerstu</h2>
+                <p>This is your homepage. All the horizontal elements are fixed as described.</p>
+                <div class="content-slider">
+                    <div class="slider-item">Library</div>
+                    <div class="slider-item">Notes</div>
+                    <div class="slider-item">Revision</div>
+                    <div class="slider-item">Exams</div>
+                    <div class="slider-item">Videos</div>
+                    <div class="slider-item">Audios</div>
+                </div>
+            </div>
+
+            <!-- Manage Myself Content -->
+            <div id="manage-myself-content" class="content-section">
+                <h2>Manage Myself</h2>
+                <div class="mm-options">
+                    <button class="mm-btn"><i class="fas fa-table"></i> Inter table</button>
+                    <button class="mm-btn"><i class="fas fa-store"></i> My store</button>
+                    <button class="mm-btn"><i class="fas fa-clipboard-check"></i> Assess</button>
+                    <button class="mm-btn"><i class="fas fa-calendar-alt"></i> Schedules</button>
+                    <button class="mm-btn"><i class="fas fa-calendar-day"></i> Events</button>
+                    <button class="mm-btn"><i class="fas fa-running"></i> Activities</button>
+                    <button class="mm-btn"><i class="fas fa-chalkboard-teacher"></i> Online tutor</button>
+                    <button class="mm-btn"><i class="fas fa-ellipsis-h"></i> Other</button>
+                </div>
+            </div>
+
+            <!-- Manage Group Content -->
+            <div id="manage-group-content" class="content-section">
+                <h2>Manage My Group</h2>
+                <div class="mg-options">
+                    <button class="mg-btn"><i class="fas fa-users"></i> Your group</button>
+                    <button class="mg-btn"><i class="fas fa-handshake"></i> Meet</button>
+                    <button class="mg-btn"><i class="fas fa-user-plus"></i> Register</button>
+                    <button class="mg-btn"><i class="fas fa-clipboard-check"></i> Assess</button>
+                    <button class="mg-btn"><i class="fas fa-record-vinyl"></i> Record</button>
+                </div>
+            </div>
+
+            <!-- Support Content -->
+            <div id="support-content" class="content-section">
+                <h2>Support</h2>
+                <div class="support-form">
+                    <textarea placeholder="Write your message"></textarea>
+                    <button class="send-btn">Send <i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+
+            <!-- Contact Us Content -->
+            <div id="contact-content" class="content-section">
+                <h2>Contact Us</h2>
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> Email: fynerstu@gmail.com</p>
+                    <p><i class="fab fa-facebook"></i> Facebook: fyner_stu</p>
+                </div>
+            </div>
+
+            <!-- Profile Settings Content -->
+            <div id="profile-settings-content" class="content-section">
+                <h2>Profile Settings</h2>
+                <div class="profile-options">
+                    <div class="profile-option">
+                        <h3>1. Name</h3>
+                        <button class="profile-btn">Manage, merge</button>
+                        <button class="profile-btn">Manage, try group</button>
+                    </div>
+                    <div class="profile-option">
+                        <h3>2. Type</h3>
+                        <input type="text" placeholder="Write your message">
+                        <button class="profile-btn">Send</button>
+                    </div>
+                    <div class="profile-option">
+                        <h3>3. Contact us</h3>
+                        <p>Contact us at fynetwe@gmail.com</p>
+                        <p>Facebook: Fynet Studio</p>
+                    </div>
+                    <div class="profile-option">
+                        <h3>4. Other</h3>
+                        <button class="profile-btn">Profile setting</button>
+                        <button class="profile-btn">Page Setting</button>
+                        <button class="profile-btn">My account</button>
+                        <button class="profile-btn">Logout</button>
+                    </div>
+                    <div class="profile-option">
+                        <h3>5. Profile setting</h3>
+                        <button class="profile-btn">Profile setting</button>
+                        <button class="profile-btn">Online active mark</button>
+                        <button class="profile-btn">Join the group when you are invited to by Change profile</button>
+                        <button class="profile-btn">Pickup</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Content -->
+            <div id="account-content" class="content-section">
+                <h2>My Account</h2>
+                <div class="account-options">
+                    <div class="theme-toggle">
+                        <span>Light</span>
+                        <label class="switch">
+                            <input type="checkbox" id="theme-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                        <span>Dark</span>
+                    </div>
+                    <button class="account-btn"><i class="fas fa-atom"></i> Setting Atomtheme</button>
+                    <div class="account-section">
+                        <h3>Pay to account</h3>
+                        <button class="account-btn">Pay for myself</button>
+                        <button class="account-btn">Pay for an individual</button>
+                        <button class="account-btn">Pay for a group</button>
+                    </div>
+                    <div class="account-balance">
+                        <p>Account balance: <span class="balance">Kb 0.00</span></p>
+                        <button class="account-btn">View transactions</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Registration Success Modal -->
+        <div id="reg-success-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3>Registration Successful</h3>
+                <p>A link has been sent to your Email containing username and password.</p>
+                <button class="modal-btn">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
